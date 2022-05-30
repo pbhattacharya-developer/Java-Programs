@@ -1,0 +1,101 @@
+import java.util.*;
+interface DS{
+    void insertion(int x);
+    int deletion();
+}
+
+class Stack implements DS{
+    int S[];
+    int top;
+    int n;
+    Stack(int n){
+        this.n= n;
+        S= new int[n];
+        top=-1;
+    }
+
+    public void insertion(int x){
+        if(top==n-1){
+            System.out.println("Stack Overflow!!");
+            System.exit(0);
+        }
+        else{
+            S[++top]=x;
+            System.out.println(x+" inserted into the stack");
+        }
+    }
+
+    public int deletion(){
+        int temp=0;
+        if(top==-1)
+        {
+            System.out.println("Stack Underflow!");
+            System.exit(0);
+            return -1;
+        }
+        else
+        {
+            temp=S[top];
+            S[top--]=0;
+            return temp;
+        }
+    }
+}
+
+class Queue implements DS{
+    int Q[];
+    int front;
+    int rear;
+    int n;
+    Queue(int n){
+        this.n=n;
+        Q= new int[n];
+        rear=-1;
+        front=-1;
+    }
+
+    public void insertion(int x){
+        if(rear==n-1)
+        {
+            System.out.println("Queue is full!");
+            System.exit(0);
+        }
+        else{
+            Q[++rear]=x;
+            System.out.println(x+" inserted into the queue");
+        }
+    }
+
+    public int deletion(){
+        int temp=0;
+        if(rear==front)
+        {
+            System.out.println("Queue is empty!");
+            System.exit(0);
+            return -1;
+        }
+        else{
+            temp=Q[++front];
+            Q[front]=0;
+            return temp;
+        }
+    }
+}
+
+public class StackQueue {
+    public static void main(String args[]){
+        Stack ob1=new Stack(3);
+        ob1.insertion(45);
+        ob1.insertion(21);
+        ob1.insertion(3);
+        System.out.println(ob1.deletion()+" deleted from the stack");
+        System.out.println(" ");
+        Queue ob2=new Queue(4);
+        ob2.insertion(6);
+        ob2.insertion(34);
+        ob2.insertion(-5);
+        ob2.insertion(12);
+        System.out.println(ob2.deletion()+" deleted from the queue");
+    }
+
+}
