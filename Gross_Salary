@@ -1,0 +1,62 @@
+import java.util.*;
+class Employee
+{
+    double bs;
+    int id;
+    double gs;
+
+    void input()
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter id of employee : ");
+        id=sc.nextInt();
+        System.out.print("Enter Basic salary of employee "+id+": ");
+        bs=sc.nextDouble();
+
+
+    }
+    void calc()
+    {
+        double hra,da;
+        if(bs>8000.0)
+        {
+            hra= (10.0/100.0)*bs;
+            da= (15.0/100.0)*bs;
+        }
+        else
+        {
+            hra= (15.0/100.0)*bs;
+            da=1000.0;
+        }
+        gs=bs+hra+da;
+    }
+    void display()
+    {
+        System.out.println("The gross salary of employee id "+id + " is "+gs);
+        System.out.println(" ");
+    }
+}
+
+
+public class Gross_Salary
+{
+    public static void main(String[] args) {
+        Employee E1= new Employee();
+        E1.input();
+        E1.calc();
+        E1.display();
+
+        Employee E2= new Employee();
+        E2.input();
+        E2.calc();
+        E2.display();
+
+        Employee E3= new Employee();
+        E3.input();
+        E3.calc();
+        E3.display();
+
+    }
+}
+
+
