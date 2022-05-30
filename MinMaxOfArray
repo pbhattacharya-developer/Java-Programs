@@ -1,0 +1,28 @@
+import java.util.*;
+public class MinMaxOfArray
+{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int array_var[]=new int[10];
+        int n,i;
+        System.out.println("Enter the size: ");
+        n=sc.nextInt();
+        System.out.println("Enter the elements: ");
+        for(i=0;i<n;i++)
+        {
+            array_var[i]=sc.nextInt();
+        }
+        int min = array_var[0];
+        int max = array_var[0];
+        for (i=0; i<n; i++)
+        {
+            if (array_var[i] < min)
+                min = array_var[i];
+            if (array_var[i] > max)
+                max = array_var[i];
+        }
+
+        System.out.println("Minimum value: " + min);
+        System.out.println("Maximum value: " + max);
+    }
+}
