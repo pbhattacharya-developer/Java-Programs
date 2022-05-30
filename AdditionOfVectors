@@ -1,0 +1,44 @@
+class Vector
+{
+    int hour;
+    int min;
+    int sec;
+    Vector(int hour,int min,int sec)
+    {
+        this.hour=hour;
+        this.min=min;
+        this.sec=sec;
+    }
+    Vector calculate(Vector vector,Vector vector1)
+    {
+        Vector temp=new Vector(0,0,0);
+        temp.hour=hour+vector.hour+vector1.hour;
+        temp.min=min+vector.min+vector1.min;
+        temp.sec=sec+vector.sec+vector1.sec;
+        if(temp.sec>=60){
+            temp.min++;
+            temp.sec=temp.sec-60;
+        }
+        if(temp.min>=60){
+            temp.hour++;
+            temp.min=temp.min-60;
+        }
+        return temp;
+    }
+    void display()
+    {
+        System.out.println(hour+" Hours "+min+" mins "+sec+" secs");
+    }
+}
+public class AdditionOfVectors
+{
+    public static void main(String[] args) {
+        Vector vec=new Vector(2,10,37);
+        Vector vec1=new Vector(1,30,15);
+        Vector vec2=new Vector(0,45,5);
+        Vector vec3=vec.calculate(vec1,vec2);
+        vec3.display();
+
+    }
+}
+
