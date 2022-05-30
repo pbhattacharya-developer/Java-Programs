@@ -1,0 +1,200 @@
+import java.util.*;
+
+abstract class Account{
+    int acc_no;
+    double balance;
+
+    Account(int acc, double bal){
+        acc_no= acc;
+        balance= bal;
+    }
+    void deposit(double amt){
+        balance+= amt;
+        System.out.println("Balance after deposition: Rs."+balance);
+    }
+    abstract void withdrawal(double amt);
+    void showbalance(){
+        System.out.println("ACCOUNT NO. : "+acc_no);
+        System.out.println("BALANCE : Rs."+balance);
+    }
+}
+
+class Savings extends Account{
+    double rate, min_balance;
+
+    Savings(int acc, double bal, double min_bal, double r){
+        super(acc,bal);
+        rate= r;
+        min_balance= min_bal;
+    }
+    void withdrawal(double amt){
+        if(amt> balance)
+            System.out.println("Balance is less than the amount you want to withdraw");
+        balance-=amt;
+        if(balance < min_balance){
+            System.out.println("Withdrawal not possible, amount exceeding the minimum balance");
+            balance+=amt;
+        }
+        else{
+            System.out.println("Withdrawal amount: Rs."+amt);
+            System.out.println("Balance after withdrawal: Rs."+balance);
+        }
+    }
+    void AddInterest(){
+        double interest;
+        interest= balance *rate*0.01;
+        balance+= interest;
+        System.out.println("Interest of Rs."+interest+" added to the account no. " +acc_no);
+        System.out.println("Balance after Addition of interest: Rs."+balance);
+    }
+}
+
+class Current extends Account{
+    double neglimit;
+    double percentage;
+    Current(int acc, double bal, double nl, double per){
+        super(acc,bal);
+        neglimit= nl;
+        percentage= per;
+    }
+    void withdrawal(double amt){
+        double penalty;
+        balance-= amt;
+        if(balance < neglimit){
+            penalty=(balance- neglimit)*percentage*0.01;
+            System.out.println("Penalty value: Rs."+Math.abs(penalty));
+            balance+=penalty;
+            System.out.println("Balance after adjusted with the penalty: Rs."+Math.abs(balance)+"\nYou have to pay this amount to the bank in between a certain time period");
+        }
+        else{
+            System.out.println("Withdrawal amount: Rs."+amt);
+            System.out.println("Balance after withdrawal: Rs."+balance);
+        }
+    }
+}
+
+class FD extends Account{
+    double noy;
+    double roi;
+    FD(int acc, double bal,double r){
+        super(acc,bal);
+        noy= 0.0;
+        roi= r;
+    }
+    void withdrawal(double y){
+        noy=y;
+        double final_amount = balance+balance*roi*noy*0.01;
+        System.out.println("You will be able to withdraw after "+noy+" year from the date of deposition");
+        System.out.println("Final Amount: Rs."+final_amount);
+    }
+}
+
+public class Banking_System {
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        int account_no=0;
+        Account ref;
+        Savings sob = new Savings(659453,20000.00,1000.00,4.00);
+        Current cob = new Current(404358,20000,-30000,10.00);
+        FD fob = new FD(271643,40000,9.32);
+
+        System.out.println(" 1- > OPEN AN ACCOUNT \n 2 -> SAVINGS \n 3 -> CURRENT \n 4 -> FiXED DEPOSIT \n 5 -> EXIT ");
+        System.out.print("Choice: ");
+        int choice = sc.nextInt();
+        while(choice==1)
+        {
+            account_no=(int)Math.floor(Math.random()*999999);
+            System.out.println(" Account Created successfully.\n Your Generated Account Number is: "+account_no);
+            System.out.println("");
+            System.out.println(" 1- > OPEN AN ACCOUNT \n 2 -> SAVINGS \n 3 -> CURRENT \n 4 -> FiXED DEPOSIT \n 5 -> EXIT ");
+            System.out.print("Choice: ");
+            choice=sc.nextInt();
+            break;
+        }
+        while(choice==2)
+        {
+            ref = sob;
+            System.out.println("");
+            System.out.println(" 1 -> VIEW BALANCE \n 2 -> DEPOSIT \n 3 -> WITHDRAW \n 4 -> ADD INTEREST \n 5 ->EXIT");
+            System.out.print("Choice: ");
+            int choice1 = sc.nextInt();
+            switch(choice1)
+            {
+                case 1: System.out.print("Current balance: ");
+                    ref.showbalance();
+                    continue;
+                case 2: System.out.print("Enter amount to deposit: ");
+                    double amount = sc.nextDouble();
+                    ref.deposit(amount);
+                    break;
+                case 3: System.out.print("Enter amount to withdraw: ");
+                    double amount2 = sc.nextDouble();
+                    ref.withdrawal(amount2);
+                    break;
+                case 4: ((Savings)ref).AddInterest();
+                    break;
+                case 5:  System.out.println("");
+                    System.out.println(" 1- > OPEN AN ACCOUNT \n 2 -> SAVINGS \n 3 -> CURRENT \n 4 -> FiXED DEPOSIT \n 5 -> EXIT ");
+                    System.out.print("Choice: ");
+                    choice=sc.nextInt();
+                    break;
+                default: System.out.println("Enter Valid Choice!");
+                    break ;
+            }
+        }
+
+        while(choice==3){
+            ref = cob;
+            System.out.println("");
+            System.out.println(" 1 -> VIEW BALANCE \n 2 -> DEPOSIT \n 3 -> WITHDRAW \n 4 ->EXIT");
+            System.out.print("Choice: ");
+            int choice2 = sc.nextInt();
+            switch(choice2)
+            {
+                case 1: ref.showbalance();
+                    break;
+                case 2: System.out.print("Enter amount to deposit: ");
+                    double amount3 = sc.nextDouble();
+                    ref.deposit(amount3);
+                    break;
+                case 3: System.out.print("Enter amount to withdraw: ");
+                    double amount4 = sc.nextDouble();
+                    ref.withdrawal(amount4);
+                    break;
+                case 4:  System.out.println("");
+                    System.out.println(" 1- > OPEN AN ACCOUNT \n 2 -> SAVINGS \n 3 -> CURRENT \n 4 -> FiXED DEPOSIT \n 5 -> EXIT ");
+                    System.out.print("Choice: ");
+                    choice=sc.nextInt();;
+                    break;
+                default: System.out.println("Enter Valid Choice!");
+            }
+        }
+        while(choice==4)
+        {
+            ref = fob;
+            System.out.println("");
+            System.out.println(" 1 -> VIEW BALANCE \n 2 -> WITHDRAW \n 3 ->EXIT ");
+            System.out.print("Choice: ");
+            int choice3 = sc.nextInt();
+            switch(choice3)
+            {
+                case 1: ref.showbalance();
+                    break;
+                case 2: System.out.print("Enter the number of years: ");
+                    double year = sc.nextDouble();
+                    ref.withdrawal(year);
+                    break;
+                case 3:  System.out.println("");
+                    System.out.println(" 1- > OPEN AN ACCOUNT \n 2 -> SAVINGS \n 3 -> CURRENT \n 4 -> FiXED DEPOSIT \n 5 -> EXIT");
+                    System.out.print("Choice: ");
+                    choice=sc.nextInt();;
+                    break;
+                default: System.out.println("Enter Valid Choice!");
+            }
+        }
+        while(choice==5)
+        {
+            System.exit(0);
+        }
+    }
+}
