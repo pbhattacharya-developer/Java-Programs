@@ -1,0 +1,96 @@
+
+
+abstract class Air
+{
+    int pid, lw,ew, wt;
+    Air(int p,int w)
+    {
+        pid=p;
+        wt=w;
+    }
+    abstract void setlimit();
+
+    void display()
+    {
+        System.out.println("The id of the passenger "+pid);
+        System.out.println("The weight of the luggage of the passenger "+wt);
+        System.out.println("The limit weight of the luggage of this air line is "+lw);
+        ew=wt-lw;
+        if(ew<=0)
+            System.out.println("Your luggage is under limit");
+        else
+            System.out.println("Your extra weight is "+ew);
+    }
+}
+
+class Indigo extends Air
+{
+    int age;
+    Indigo (int p, int w, int a)
+    {
+        super (p,w);
+        age=a;
+    }
+    void setlimit()
+    {
+        if(age>=60)
+            lw=25;
+        else
+            lw=20;
+    }
+}
+
+class Vistara extends Air
+{
+    int tp;
+    Vistara(int p,int w,int t)
+    {
+        super(p,w);
+        tp=t;
+    }
+
+    void setlimit()
+    {
+        lw=(int)((0.1/100)*tp);
+    }
+}
+
+class AirAsia extends Air
+{
+    int classcode;
+    AirAsia(int p,int w,int c)
+    {
+        super(p,w);
+        classcode=c;
+    }
+    void setlimit()
+    {
+        if (classcode==1)
+            lw=30;
+        else
+            lw=15;
+    }
+}
+
+public class Flight_Details
+{
+    public static void main(String args[])
+    {
+        Indigo f1=new Indigo(101,55,70);
+        Vistara f2=new Vistara(102,30,75000);
+        AirAsia f3=new AirAsia(103,75,2);
+        Air ref;
+        ref=f1;
+        ref.setlimit();
+        ref.display();
+        System.out.println();
+        ref=f2;
+        ref.setlimit();
+        ref.display();
+        System.out.println();
+        ref=f3;
+        ref.setlimit();
+        ref.display();
+
+    }
+}
