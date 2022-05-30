@@ -1,0 +1,31 @@
+class Medal
+{
+    int gold,silver,bronze;
+    Medal(int a,int b,int c)
+    {
+        gold=a;
+        silver=b;
+        bronze=c;
+    }
+    Medal sum(Medal M)
+    {
+        Medal temp=new Medal(0,0,0);
+        temp.gold=gold+M.gold;
+        temp.silver=silver+M.silver;
+        temp.bronze= bronze+M.bronze;
+        return temp;
+    }
+    void printMedal(){
+        System.out.println("Gold: "+gold+" Silver: "+silver+" Bronze: "+bronze);
+    }
+}
+public class Medals
+{
+    public static void main(String args[])
+    {
+        Medal archery = new Medal(2,4,2);
+        Medal hockey = new Medal(1,1,3);
+        Medal sum = archery.sum(hockey);
+        sum.printMedal();
+    }
+}
