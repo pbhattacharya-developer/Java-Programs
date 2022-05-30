@@ -1,0 +1,54 @@
+import java.util.*;
+public class Matrix_Multiplication
+{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a[][]=new int[2][2];
+        int b[][]=new int[2][2];
+        int c[][]=new int[2][2];
+        int i,j,m,n,p,q,k,sum;
+        System.out.println("Enter the no. of rows & columns of matrix a: ");
+        m=sc.nextInt();
+        n=sc.nextInt();
+        System.out.println("Enter the no. of rows & columns of matrix b: ");
+        p=sc.nextInt();
+        q=sc.nextInt();
+        if(p==n)
+        {
+            System.out.println("Enter data of matrix a: ");
+            for(i=0;i<m;i++)
+            {
+                for(j=0;j<n;j++)
+                {
+                    a[i][j]=sc.nextInt();
+                }
+            }
+
+            System.out.println("Enter data of matrix b: ");
+            for(i=0;i<p;i++)
+            {
+                for(j=0;j<q;j++)
+                {
+                    b[i][j]=sc.nextInt();
+                }
+            }
+            System.out.println("The product of the two matrices is : ");
+            for(i=0;i<m;i++)
+            {
+                for(j=0;j<q;j++)
+                {
+                    c[i][j]=0;
+                    for(k=0;k<m;k++)
+                        c[i][j]+=a[i][k]*b[k][j];
+                    System.out.print(c[i][j]+" ");
+                }
+                System.out.println();
+            }
+        }
+        else
+        {
+            System.out.println("Multiplication is not possible ");
+        }
+    }
+}
+
