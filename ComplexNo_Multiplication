@@ -1,0 +1,31 @@
+class Complex{
+    double real;
+    double imag;
+    Complex(double real,double imag){
+        this.real=real;
+        this.imag=imag;
+    }
+    Complex calculation(Complex c)
+    {
+        Complex temp = new Complex(0,0);
+        temp.real = (real*c.real-imag*c.imag);
+        temp.imag = (imag*c.real)+(real*c.imag);
+        return temp;
+    }
+    String display()
+    {
+        return (real + " + " + imag + "i");
+    }
+}
+public class ComplexNo_Multiplication
+{
+    public static void main(String[] args) {
+        Complex c1 = new Complex(3,2);
+        Complex c2 = new Complex(5,6);
+        Complex product = c1.calculation(c2);
+        System.out.println("C1: " + c1.display());
+        System.out.println("C2: " + c2.display());
+        System.out.println("Product: " + product.display());
+    }
+}
+
